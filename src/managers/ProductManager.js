@@ -51,6 +51,19 @@ class ProductManager {
     const filtered = products.filter(p => p.id !== id);
     await this._writeFile(filtered);
   }
+
+  deleteProduct(id) {
+  const index = this.products.findIndex(p => p.id === id);
+  if (index !== -1) {
+    const removed = this.products.splice(index, 1);
+    console.log(`Produto com ID ${id} removido`);
+    return removed;
+  } else {
+    console.log('Produto não encontrado');
+    return null;
+  }
+}
+
 }
 
 module.exports = ProductManager;
