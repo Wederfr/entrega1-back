@@ -1,5 +1,9 @@
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const CARTS_FILE = path.join(__dirname, '../../data/carts.json');
 
@@ -51,4 +55,4 @@ class CartManager {
   }
 }
 
-module.exports = CartManager;
+export default CartManager;

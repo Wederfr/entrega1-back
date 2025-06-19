@@ -1,17 +1,41 @@
 import { Router } from 'express';
+import Product from '../models/Product.js';
+import Cart from '../models/Cart.js';
 
 const router = Router();
 
-export default (productManager) => {
-  router.get('/', (req, res) => {
-    const products = productManager.getProducts();
-    res.render('home', { products });
-  });
+// Página inicial 
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find().lean();
+    res.render('home', { products, hasProducts: products.length > 0 });
+  } catch (error) {
+    res.status(500).send('Erro ao carregar a home');
+  }
+});
 
-  router.get('/realtimeproducts', (req, res) => {
-    const products = productManager.getProducts();
-    res.render('realTimeProducts', { products });
-  });
+// Página de detalhes do produto
+router.get('/products/:pid', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.pid).lean();
+    if (!product) return res.status(404).send('Produto não encontrado');
+    res.render('productDetail', { product });
+  } catch (error) {
+    res.status(500).send('Erro ao carregar os detalhes do produto');
+  }
+});
 
-  return router;
-};
+// Página do carrinho
+router.get('/cart/:cid', async (req, res) => {
+  try {
+    const cart = await Cart.findById(req.params.cid)
+      .populate('products.product')
+      .lean();
+    if (!cart) return res.status(404).send('Carrinho não encontrado');
+    res.render('cart', { cart, hasProducts: cart.products && cart.products.length > 0 });
+  } catch (error) {
+    res.status(500).send('Erro ao carregar o carrinho');
+  }
+});
+
+export default router;

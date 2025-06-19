@@ -2,10 +2,22 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>{{title}}</title>
-  <script src="/socket.io/socket.io.js"></script>
+  <title>Minha Loja</title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  {{{body}}}
+  <header>
+    <h1>Minha Loja</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cart/CARRINHO">Carrinho</a>
+      
+  </header>
+  <main>
+    {{{body}}}
+  </main>
+  <footer>
+    <p>&copy; {{year}} Minha Loja - Projeto para estudos</p>
+  </footer>
 </body>
 </html>

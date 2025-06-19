@@ -1,0 +1,10 @@
+<h2>{{product.title}}</h2>
+<p><strong>Preço:</strong> {{product.price}} R$</p>
+
+{{#if product.description}}
+  <p><strong>Descrição:</strong> {{product.description}}</p>
+{{else}}
+  <p><em>Produto sem descrição.</em></p>
+{{/if}}
+
+<a href="/">Voltar para a Home</a>

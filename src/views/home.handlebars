@@ -1,0 +1,14 @@
+<h2>Produtos disponíveis</h2>
+
+{{#if hasProducts}}
+  <ul>
+    {{#each products}}
+      <li>
+        <strong>{{this.title}}</strong> — <span style="font-weight: bold;">{{this.price}} R$</span>
+        | <a href="/products/{{this._id}}">Ver detalhes</a>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>Nenhum produto disponível no momento.</p>
+{{/if}}

@@ -1,5 +1,9 @@
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const PRODUCTS_FILE = path.join(__dirname, '../../data/products.json');
 
@@ -29,7 +33,7 @@ class ProductManager {
   async add(product) {
     const products = await this._readFile();
     const newProduct = {
-      id: Date.now().toString(), 
+      id: Date.now().toString(),
       ...product
     };
     products.push(newProduct);
@@ -50,20 +54,8 @@ class ProductManager {
     const products = await this._readFile();
     const filtered = products.filter(p => p.id !== id);
     await this._writeFile(filtered);
-  }
-
-  deleteProduct(id) {
-  const index = this.products.findIndex(p => p.id === id);
-  if (index !== -1) {
-    const removed = this.products.splice(index, 1);
-    console.log(`Produto com ID ${id} removido`);
-    return removed;
-  } else {
-    console.log('Produto não encontrado');
-    return null;
+    return products.length !== filtered.length;
   }
 }
 
-}
-
-module.exports = ProductManager;
+export default ProductManager;

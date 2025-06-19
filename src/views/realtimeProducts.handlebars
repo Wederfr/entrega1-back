@@ -1,0 +1,30 @@
+<h1>Lista de Produtos em Tempo Real</h1>
+
+<ul id="productList">
+  {{#if products.length}}
+    {{#each products}}
+      <li>ID: {{_id}} | {{title}} - R$ {{price}}</li>
+    {{/each}}
+  {{else}}
+    <li>Nenhum produto cadastrado.</li>
+  {{/if}}
+</ul>
+
+<h2>Adicionar Produto</h2>
+<form id="addForm">
+  <input type="text" id="title" placeholder="Título" required /><br>
+  <input type="text" id="description" placeholder="Descrição" required /><br>
+  <input type="number" id="price" placeholder="Preço" required /><br>
+  <input type="text" id="thumbnail" placeholder="Thumbnail" required /><br>
+  <input type="text" id="code" placeholder="Código" required /><br>
+  <input type="number" id="stock" placeholder="Estoque" required /><br>
+  <button type="submit">Adicionar</button>
+</form>
+
+<h2>Deletar Produto</h2>
+<form id="deleteForm">
+  <input type="text" id="deleteId" placeholder="ID do produto" required />
+  <button type="submit">Deletar</button>
+</form>
+
+<script src="/js/realtime.js"></script>
